@@ -3,20 +3,35 @@
 
 namespace Backoffice;
 
+use Backoffice\Model\User;
+use Backoffice\Model\UserTable;
+
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
 use Zend\I18n\Translator\Translator;
 use Zend\Validator\AbstractValidator;
 
-use Backoffice\Model\User;
-use Backoffice\Model\UserTable;
-
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
 
+use Zend\ModuleManager\ModuleManager;
+
 class Module
 {
+    
+    public function init(ModuleManager $moduleManager)
+    {
+        // http://blog.evan.pro/module-specific-layouts-in-zend-framework-2
+        $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
+        $sharedEvents->attach(__NAMESPACE__, 'dispatch', function($e) {
+            // This event will only be fired when an ActionController under the Backoffice namespace is dispatched.
+            $controller = $e->getTarget();
+            $controller->layout('layout/backoffice');
+        }, 100);
+    }
+    
+    
     public function onBootstrap(MvcEvent $e)
     {
         $e->getApplication()->getServiceManager()->get('translator');

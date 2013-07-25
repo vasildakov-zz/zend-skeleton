@@ -20,6 +20,18 @@ return array(
                     ),
                 ),
             ),
+            'login' => array(
+                'type'    => 'literal',
+                'options' => array(
+                    'route'    => '/auth/login',
+                    'constraints' => array(),
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller' => 'Auth',
+                        'action'     => 'login',                                
+                    )
+                )
+            ),            
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -69,7 +81,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Auth' => 'Application\Controller\AuthController'
         ),
     ),
     'view_manager' => array(

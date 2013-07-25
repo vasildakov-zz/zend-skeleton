@@ -37,7 +37,7 @@ class IndexController extends AbstractActionController {
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $album = $entityManager->find("Album\Entity\Album", array("id" => 2));
         $entityManager->persist($album);
-        print_r($album);
+        #print_r($album);
         
         return new ViewModel(array(
                     // 'albums' => $this->getEntityManager()->getRepository('Album\Entity\Album')->findAll()
