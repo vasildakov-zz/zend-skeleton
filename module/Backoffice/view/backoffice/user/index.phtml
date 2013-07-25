@@ -1,0 +1,35 @@
+<?php
+// module/Backoffice/view/backoffice/user/index.phtml:
+
+$title = 'Backoffice / User::index';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p>
+    <a href="<?php echo $this->url('user', array('action'=>'add'));?>"><?php echo $this->translate("Add new user"); ?></a>
+</p>
+
+<table class="table table-striped">
+<tr>
+    <th><?php echo $this->translate("ID"); ?></th>
+    <th><?php echo $this->translate("Username"); ?></th>
+    <th><?php echo $this->translate("Email"); ?></th>
+    <th><?php echo $this->translate("Date"); ?></th>
+    <th><?php echo $this->translate("Status"); ?></th>    
+    <th><?php echo $this->translate("Action"); ?></th>
+</tr>
+<?php foreach ($users as $user) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($user->id);?></td>
+    <td><?php echo $this->escapeHtml($user->username);?></td>
+    <td><?php echo $this->escapeHtml($user->email);?></td>
+    <td><?php echo $this->escapeHtml($user->date);?></td>
+    <td><?php echo $this->escapeHtml($user->status);?></td>
+    <td>
+        <a href="<?php echo $this->url('user', array('action'=>'edit', 'id' => $user->id));?>"><?php echo $this->translate("Edit"); ?></a>
+        <a href="<?php echo $this->url('user', array('action'=>'delete', 'id' => $user->id));?>"><?php echo $this->translate("Delete"); ?></a>
+    </td>
+</tr>
+<?php endforeach; ?>
+</table>

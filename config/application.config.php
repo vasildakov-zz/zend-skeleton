@@ -8,7 +8,7 @@ return array(
         'DoctrineORMModule',
         'BjyProfiler',
         'Album',
-        #'Backoffice',
+        'Backoffice',
         #'Blog',
     ),
 
