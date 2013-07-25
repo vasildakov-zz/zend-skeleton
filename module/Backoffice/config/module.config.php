@@ -46,6 +46,17 @@ return array(
             'backoffice' => __DIR__ . '/../view',
         ),
     ),
+    'service_manager' => array(
+        'factories' => array(
+            'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+        ),        
+    ),
+    'translator' => array(
+        'locale' => 'en',
+        'translation_file_patterns' => array(
+            
+        )
+    ),
     // Doctrine config
     'doctrine' => array(
         'driver' => array(

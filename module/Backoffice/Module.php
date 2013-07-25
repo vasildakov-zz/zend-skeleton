@@ -6,6 +6,9 @@ namespace Backoffice;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
+use Zend\I18n\Translator\Translator;
+use Zend\Validator\AbstractValidator;
+
 use Backoffice\Model\User;
 use Backoffice\Model\UserTable;
 
