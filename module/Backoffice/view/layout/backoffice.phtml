@@ -22,18 +22,18 @@
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
-                <div class="container">
+                <div class="container-fluid">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('BackOffice') ?><sup>™</sup></a>
+                    <a class="brand" href="<?php echo $this->url('backoffice') ?>"><?php echo $this->translate('BackOffice') ?><sup>™</sup></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-left">
                             <li class="active"><a href="<?php echo $this->url('backoffice') ?>"><?php echo $this->translate('Dashboard') ?></a></li>
                             <li class=""><a href="<?php echo $this->url('user') ?>"><?php echo $this->translate('User') ?></a></li>
-                            <li class=""><a href="#"><?php echo $this->translate('Site') ?></a></li>
+                            <li class=""><a href="<?php echo $this->url('site') ?>"><?php echo $this->translate('Site') ?></a></li>
                             <li class=""><a href="#"><?php echo $this->translate('Campaign') ?></a></li>
                             <li class=""><a href="#"><?php echo $this->translate('Rate') ?></a></li>
                             <li class=""><a href="#"><?php echo $this->translate('Payment') ?></a></li>
@@ -46,6 +46,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a tabindex="-1" href="#"><?php echo $this->translate('Profile'); ?></a></li>      
                                     <li><a tabindex="-1" href="#"><?php echo $this->translate('Action'); ?></a></li>
+                                    <li><a tabindex="-1" href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout'); ?></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -53,13 +54,14 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container-fluid" style="min-height: 800px;">
             <?php echo $this->content; ?>
-            <hr>
-            <footer>
-                <p>&copy; 2005 - 2012 by Vasil Dakov. <?php echo $this->translate('All rights reserved.') ?></p>
-            </footer>
         </div> <!-- /container -->
+        
+        <footer>
+            <p>&copy; 2005 - 2012 by Vasil Dakov. <?php echo $this->translate('All rights reserved.') ?></p>
+        </footer>
+        
         <?php echo $this->inlineScript() ?>
     </body>
 </html>

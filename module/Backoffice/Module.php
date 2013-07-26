@@ -31,14 +31,35 @@ class Module
         }, 100);
     }
     
-    
-    public function onBootstrap(MvcEvent $e)
+    /**
+     * http://framework.zend.com/manual/2.0/en/modules/zend.mvc.mvc-event.html
+     * https://github.com/ZF-Commons/ZfcUser/issues/187
+     * 
+     */
+    public function onBootstrap(MvcEvent $event)
     {
-        $application = $e->getApplication();
-        $serviceManager = $application->getServiceManager();
-        $translator = $serviceManager->get('translator');
         
-        $eventManager        = $e->getApplication()->getEventManager();
+        #$controller = $this->getRequest()->getControllerName();
+        #$action = $this->getRequest()->getActionName();
+
+        $application = $event->getApplication();
+        $serviceManager = $application->getServiceManager();
+        $auth = $serviceManager->get('authService');
+        $routeMatch = $event->getRouteMatch();
+        
+        #$request = $application->getRequest()->getMethod(); 
+        $request = $application->getRequest()->getRequestUri(); 
+        #print_r($request);
+        
+        #if ( !$auth->hasIdentity() && $routeMatch->getMatchedRouteName() != 'user/login' ) {
+        if ( !$auth->hasIdentity() ) {
+            #print_r('here');
+        }         
+        
+        
+        $translator = $serviceManager->get('translator');
+     
+        $eventManager        = $event->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
     }
@@ -49,6 +70,15 @@ class Module
         return include __DIR__ . '/config/module.config.php';
     }
 
+    public function getControllerPluginConfig() {
+        return array(
+            'invokables' => array(
+                'currentDate'
+                 => 'Backoffice\Controller\Plugin\CurrentDate'
+            )
+        );        
+    }
+    
     
     public function getAutoloaderConfig()
     {
@@ -67,6 +97,10 @@ class Module
     
     public function getServiceConfig() {
         return array(
+            'invokables' => array(
+                'greetingService2' => 'Backoffice\Service\GreetingService',
+                'authService2' => 'Backoffice\Service\AuthService'
+            ), 
             'factories' => array(
                 'Backoffice\Model\UserTable' =>  function($sm) {
                     $tableGateway = $sm->get('UserTableGateway');
@@ -80,8 +114,6 @@ class Module
                     return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
-        );
-        
+        );    
     }
-
 }

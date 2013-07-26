@@ -1,0 +1,26 @@
+<?php
+// module/Backoffice/view/backoffice/auth/login.phtml:
+
+$title = 'Please sign in';
+$this->headTitle($title);
+?>
+
+
+
+<?php
+if ($this->loginSuccess) {
+    echo "Hello, " . $this->userLoggedIn . '!';
+}
+else {
+    if ($this->loginError)
+        echo "The credentials provided are invalid.";
+
+    $this->form->prepare();
+    echo $this->form()->openTag($this->form); ?>
+    <h2 class="form-signin-heading"><?php echo $this->escapeHtml($title); ?></h2>
+<?php
+    echo $this->formRow($this->form->get('username'));
+    echo $this->formRow($this->form->get('password'));
+    echo $this->formSubmit($this->form->get('submit'));
+    echo $this->form()->closeTag();
+}
