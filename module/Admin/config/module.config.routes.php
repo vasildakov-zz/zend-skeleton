@@ -1,4 +1,10 @@
 <?php
+/**
+ * Subdomain based route with child routes
+ * See: A complex example with child routes
+ * http://framework.zend.com/manual/2.0/en/modules/zend.mvc.routing.html
+ */
+namespace Admin;
 
 return array(
     'router' => array(
@@ -6,7 +12,6 @@ return array(
             'admin' => array(
                 'type' => 'hostname',
                 'options' => array(
-                    #'route' => '/api[/:controller][/:action][/:id]',
                     'route' => 'admin.zend-skeleton.dev',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -17,7 +22,29 @@ return array(
                         'action' => 'index',
                     ),
                 ),
-            ),
+                'child_routes' => array(
+                    'home' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/',
+                            'defaults' => array(
+                                'controller' => 'Admin\Controller\Index',
+                                'action' => 'index'
+                            )
+                        ),                    
+                    ),                    
+                    'theme' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/theme[/:action][/:id]',
+                            'defaults' => array(
+                                'controller' => 'Admin\Controller\Theme',
+                                'action' => 'index'
+                            )
+                        ),                    
+                    ),                    
+                ),
+            ),    
         ),
     ),
 );

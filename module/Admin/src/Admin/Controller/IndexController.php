@@ -20,10 +20,10 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {   
         $view = new ViewModel(array(
-            'message' => 'Hello admin',
+            'message' => 'Admin/Index',
         ));
         
         return $view;
     }
-    
+
 }
