@@ -1,0 +1,74 @@
+<?php if ($this->pageCount): ?>
+    <div class="pagination pagination-centered">
+        <ul>
+            <!-- First page link -->
+            <?php if (isset($this->previous)): ?>
+                <li>
+                    <a href="<?php echo $this->url($this->route, array('page' => $this->first)); ?>"><?php echo $this->translate("First"); ?></a>
+                </li>
+            <?php else: ?>
+                <li class="disabled">
+                    <a href="#"><?php echo $this->translate("First"); ?></a>
+                </li>
+            <?php endif; ?>
+            
+            
+            <!-- Previous page link -->
+            <?php if (isset($this->previous)): ?>
+                <li>
+                    <a href="<?php echo $this->url($this->route); ?>?page=<?php echo $this->previous; ?>">
+                        <?php echo $this->translate("Previous"); ?>
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="disabled">
+                    <a href="#">
+                        <?php echo $this->translate("Previous"); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+                
+            <!-- Numbered page links -->
+            <?php foreach ($this->pagesInRange as $page): ?>
+                <?php if ($page != $this->current): ?>
+                    <li>
+                        <a href="<?php echo $this->url($this->route);?>?page=<?php echo $page; ?>">
+                            <?php echo $page; ?>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li class="active">
+                        <a href="#"><?php echo $page; ?></a>
+                    </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+            <!-- Next page link -->
+            <?php if (isset($this->next)): ?>
+                <li>
+                    <a href="<?php echo $this->url($this->route); ?>?page=<?php echo $this->next; ?>">
+                        <?php echo $this->translate("Next"); ?>
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="disabled">
+                    <a href="#">
+                        <?php echo $this->translate("Next"); ?>
+                    </a>
+                </li>
+            <?php endif; ?>
+                
+            <!-- Last page link -->
+            <?php if (isset($this->next)): ?>
+                <li>
+                    <a href="<?php echo $this->url($this->route); ?>?page=<?php echo $this->last; ?>"><?php echo $this->translate("Last"); ?></a>
+                </li>
+            <?php else: ?>
+                <li class="disabled">
+                    <a href="#"><?php echo $this->translate("Last"); ?></a>
+                </li>
+            <?php endif; ?>
+                
+        </ul>
+    </div>
+<?php endif; ?>

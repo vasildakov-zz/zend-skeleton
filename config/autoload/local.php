@@ -35,7 +35,7 @@ return array(
             },
         ),
     ),    
-    'doctrine' => array(
+    /*'doctrine' => array(
         'connection' => array(
             'orm_default' => array(
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
@@ -48,7 +48,7 @@ return array(
                 )
             )
         )
-    ),    
+    ), */   
     'db' => array(
         'username' => 'root',
         'password' => '1',

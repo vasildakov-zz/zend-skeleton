@@ -11,7 +11,9 @@
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/images/favicon.ico'))
                         ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
                         ->prependStylesheet($this->basePath() . '/css/style.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') 
+                        ->prependStylesheet($this->basePath() . '/css/default.css')
+                ?>
 
         <!-- Scripts -->
         <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
@@ -54,6 +56,13 @@
                 </div>
             </div>
         </div>
+        
+        <div class="container-fluid">
+            <?php
+            echo $this->navigation('secondary_navigation')->breadcrumbs()->setMinDepth(0)->setPartial(array('partial/breadcrumb.phtml', 'Backoffice'));
+            ?>
+        </div>
+        
         <div class="container-fluid" style="min-height: 800px;">
             <?php echo $this->content; ?>
         </div> <!-- /container -->

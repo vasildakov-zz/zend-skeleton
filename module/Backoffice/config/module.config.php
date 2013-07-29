@@ -2,6 +2,13 @@
 namespace Backoffice;
 
 return array(
+    /**
+    * Remove this configuration once ZF 2.2.2 is released.
+    * @See https://github.com/zendframework/zf2/pull/4652
+    */    
+    'console' => array(
+        'router' => array(),
+    ),
     'controllers' => array(
         'invokables' => array(
             'Backoffice\Controller\Index' => 'Backoffice\Controller\IndexController',
@@ -9,70 +16,7 @@ return array(
             'Backoffice\Controller\Site' => 'Backoffice\Controller\SiteController',
             'Backoffice\Controller\Auth' => 'Backoffice\Controller\AuthController',
         ),
-    ),
-    // The following section is new and should be added to your file
-    'router' => array(
-        'routes' => array(
-            'backoffice' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/backoffice[/:controller][/:action][/:id]',
-                    'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Backoffice\Controller\Index',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
-            'login' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/backoffice/auth/login',
-                    'defaults' => array(
-                        'controller'    => 'Backoffice\Controller\Auth',
-                        'action'        => 'login',
-                    ),
-                ),
-            ),
-            'logout' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/backoffice/auth/logout',
-                    'defaults' => array(
-                        'controller'    => 'Backoffice\Controller\Auth',
-                        'action'        => 'logout',
-                    ),
-                ),
-            ),            
-            'user' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/backoffice/user[/:action][/:id]',
-                    'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id'     => '[0-9]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Backoffice\Controller\User',
-                        'action'     => 'index',
-                    ),
-                ),                
-            ),
-            'site' => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'    => '/backoffice/site[/:action][/:id]',
-                    'defaults' => array(
-                        'controller'    => 'Backoffice\Controller\Site',
-                        'action'        => 'index',
-                    ),
-                ),
-            ),             
-        ),
-    ),    
+    ),  
     'view_manager' => array(
         'template_path_stack' => array(
             'backoffice' => __DIR__ . '/../view',
@@ -85,6 +29,8 @@ return array(
         ),
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+            'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+            'secondary_navigation' => 'Backoffice\Service\SecondaryNavigationFactory',
             'greetingService' => 'Backoffice\Service\GreetingServiceFactory',
             'authService' => 'Backoffice\Service\AuthServiceFactory',
             'Zend\Db\Adapter\Adapter' => function ($sm) {
@@ -93,8 +39,7 @@ return array(
                 return new Zend\Db\Adapter\Adapter(array(
                     'driver'    => 'pdo',
                     'dsn' =>
-                        'mysql:dbname='.$dbParams['database']
-                        .';host='.$dbParams['hostname'],
+                        'mysql:dbname='.$dbParams['database'].';host='.$dbParams['hostname'],
                         'database' => $dbParams['database'],
                         'username' => $dbParams['username'],
                         'password' => $dbParams['password'],
@@ -118,16 +63,19 @@ return array(
     // Doctrine config
     'doctrine' => array(
         'driver' => array(
-            __NAMESPACE__ . '_driver' => array(
+            // __NAMESPACE__ . '_driver' => array(
+                'Backoffice_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
-                'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
+                // 'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
+                'paths' => array(__DIR__ . '/../src/Backoffice/Entity')
             ),
             'orm_default' => array(
                 'drivers' => array(
-                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
-                )
-            )
-        )
-    )     
+                    // __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                    'Backoffice\Entity' => 'Backoffice_driver'
+                ),
+            ),
+        ),
+    ),
 );

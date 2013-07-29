@@ -1,0 +1,96 @@
+2013-07-27T13:28:13+02:00 ERR (3): Exception:
+1: Could not find row 54
+Trace:
+#0 C:\bin\xampp\htdocs\zend-skeleton\module\Backoffice\src\Backoffice\Controller\UserController.php(112): Backoffice\Model\UserTable->getUser(54)
+#1 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractActionController.php(83): Backoffice\Controller\UserController->viewAction()
+#2 [internal function]: Zend\Mvc\Controller\AbstractActionController->onDispatch(Object(Zend\Mvc\MvcEvent))
+#3 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#4 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#5 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractController.php(117): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#6 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\DispatchListener.php(114): Zend\Mvc\Controller\AbstractController->dispatch(Object(Zend\Http\PhpEnvironment\Request), Object(Zend\Http\PhpEnvironment\Response))
+#7 [internal function]: Zend\Mvc\DispatchListener->onDispatch(Object(Zend\Mvc\MvcEvent))
+#8 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#9 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#10 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Application.php(309): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#11 C:\bin\xampp\htdocs\zend-skeleton\public\index.php(14): Zend\Mvc\Application->run()
+#12 {main}
+2013-07-27T13:29:49+02:00 ERR (3): Exception:
+1: Could not find row 234
+Trace:
+#0 C:\bin\xampp\htdocs\zend-skeleton\module\Backoffice\src\Backoffice\Controller\UserController.php(81): Backoffice\Model\UserTable->getUser(234)
+#1 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractActionController.php(83): Backoffice\Controller\UserController->editAction()
+#2 [internal function]: Zend\Mvc\Controller\AbstractActionController->onDispatch(Object(Zend\Mvc\MvcEvent))
+#3 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#4 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#5 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractController.php(117): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#6 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\DispatchListener.php(114): Zend\Mvc\Controller\AbstractController->dispatch(Object(Zend\Http\PhpEnvironment\Request), Object(Zend\Http\PhpEnvironment\Response))
+#7 [internal function]: Zend\Mvc\DispatchListener->onDispatch(Object(Zend\Mvc\MvcEvent))
+#8 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#9 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#10 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Application.php(309): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#11 C:\bin\xampp\htdocs\zend-skeleton\public\index.php(14): Zend\Mvc\Application->run()
+#12 {main}
+2013-07-27T13:30:55+02:00 ERR (3): Exception:
+1: Could not find row 234
+Trace:
+#0 C:\bin\xampp\htdocs\zend-skeleton\module\Backoffice\src\Backoffice\Controller\UserController.php(112): Backoffice\Model\UserTable->getUser(234)
+#1 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractActionController.php(83): Backoffice\Controller\UserController->viewAction()
+#2 [internal function]: Zend\Mvc\Controller\AbstractActionController->onDispatch(Object(Zend\Mvc\MvcEvent))
+#3 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#4 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#5 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractController.php(117): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#6 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\DispatchListener.php(114): Zend\Mvc\Controller\AbstractController->dispatch(Object(Zend\Http\PhpEnvironment\Request), Object(Zend\Http\PhpEnvironment\Response))
+#7 [internal function]: Zend\Mvc\DispatchListener->onDispatch(Object(Zend\Mvc\MvcEvent))
+#8 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#9 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#10 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Application.php(309): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#11 C:\bin\xampp\htdocs\zend-skeleton\public\index.php(14): Zend\Mvc\Application->run()
+#12 {main}
+2013-07-27T13:31:31+02:00 ERR (3): Exception:
+1: Could not find row 234
+Trace:
+#0 C:\bin\xampp\htdocs\zend-skeleton\module\Backoffice\src\Backoffice\Controller\UserController.php(112): Backoffice\Model\UserTable->getUser(234)
+#1 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractActionController.php(83): Backoffice\Controller\UserController->viewAction()
+#2 [internal function]: Zend\Mvc\Controller\AbstractActionController->onDispatch(Object(Zend\Mvc\MvcEvent))
+#3 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#4 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#5 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractController.php(117): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#6 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\DispatchListener.php(114): Zend\Mvc\Controller\AbstractController->dispatch(Object(Zend\Http\PhpEnvironment\Request), Object(Zend\Http\PhpEnvironment\Response))
+#7 [internal function]: Zend\Mvc\DispatchListener->onDispatch(Object(Zend\Mvc\MvcEvent))
+#8 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#9 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#10 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Application.php(309): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#11 C:\bin\xampp\htdocs\zend-skeleton\public\index.php(14): Zend\Mvc\Application->run()
+#12 {main}
+2013-07-27T13:35:20+02:00 ERR (3): Exception:
+1: Could not find row 54
+Trace:
+#0 C:\bin\xampp\htdocs\zend-skeleton\module\Backoffice\src\Backoffice\Controller\UserController.php(112): Backoffice\Model\UserTable->getUser(54)
+#1 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractActionController.php(83): Backoffice\Controller\UserController->viewAction()
+#2 [internal function]: Zend\Mvc\Controller\AbstractActionController->onDispatch(Object(Zend\Mvc\MvcEvent))
+#3 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#4 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#5 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractController.php(117): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#6 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\DispatchListener.php(114): Zend\Mvc\Controller\AbstractController->dispatch(Object(Zend\Http\PhpEnvironment\Request), Object(Zend\Http\PhpEnvironment\Response))
+#7 [internal function]: Zend\Mvc\DispatchListener->onDispatch(Object(Zend\Mvc\MvcEvent))
+#8 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#9 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#10 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Application.php(309): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#11 C:\bin\xampp\htdocs\zend-skeleton\public\index.php(14): Zend\Mvc\Application->run()
+#12 {main}
+2013-07-27T13:35:30+02:00 ERR (3): Exception:
+1: Could not find row 54
+Trace:
+#0 C:\bin\xampp\htdocs\zend-skeleton\module\Backoffice\src\Backoffice\Controller\UserController.php(112): Backoffice\Model\UserTable->getUser(54)
+#1 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractActionController.php(83): Backoffice\Controller\UserController->viewAction()
+#2 [internal function]: Zend\Mvc\Controller\AbstractActionController->onDispatch(Object(Zend\Mvc\MvcEvent))
+#3 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#4 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#5 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Controller\AbstractController.php(117): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#6 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\DispatchListener.php(114): Zend\Mvc\Controller\AbstractController->dispatch(Object(Zend\Http\PhpEnvironment\Request), Object(Zend\Http\PhpEnvironment\Response))
+#7 [internal function]: Zend\Mvc\DispatchListener->onDispatch(Object(Zend\Mvc\MvcEvent))
+#8 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(468): call_user_func(Array, Object(Zend\Mvc\MvcEvent))
+#9 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\EventManager\EventManager.php(207): Zend\EventManager\EventManager->triggerListeners('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#10 C:\bin\xampp\htdocs\zend-skeleton\vendor\zendframework\zendframework\library\Zend\Mvc\Application.php(309): Zend\EventManager\EventManager->trigger('dispatch', Object(Zend\Mvc\MvcEvent), Object(Closure))
+#11 C:\bin\xampp\htdocs\zend-skeleton\public\index.php(14): Zend\Mvc\Application->run()
+#12 {main}

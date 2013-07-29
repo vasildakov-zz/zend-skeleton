@@ -25,8 +25,21 @@ class Module
 
     public function getConfig()
     {
-        return include __DIR__ . '/config/module.config.php';
-    }
+        $config = array();
+        $configFiles = array(
+                __DIR__ . '/config/module.config.php',
+                __DIR__ . '/config/module.config.routes.php', // Routes
+                __DIR__ . '/config/module.config.navigation.php', // Navigation
+                __DIR__ . '/config/module.config.doctrine.php', // Doctrine
+            );
+
+            // Merge all module config options
+            foreach ($configFiles as $configFile) {
+                $config = \Zend\Stdlib\ArrayUtils::merge($config, include $configFile);
+            }
+
+            return $config;        
+    } 
     
     
     // Add this method:

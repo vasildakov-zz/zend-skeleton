@@ -5,6 +5,8 @@ namespace Backoffice\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
+
 use Backoffice\Form\Login;
 
 class AuthController extends AbstractActionController {
@@ -30,8 +32,7 @@ class AuthController extends AbstractActionController {
             return new ViewModel(
                 array(
                     'loginSuccess' => true,
-                    'userLoggedIn'
-                    => $this->authService->getIdentity()
+                    'userLoggedIn' => $this->authService->getIdentity()
                 )
             );
         }
@@ -63,6 +64,9 @@ class AuthController extends AbstractActionController {
                 }
                 else
                     #$this->redirect()->toUrl('backoffice');
+                    $user_session = new Container('user');
+                    $user_session->username = 'vasil.dakov';    
+                    
                     return $this->redirect()->toRoute('backoffice');
                     
                     /* return new ViewModel(

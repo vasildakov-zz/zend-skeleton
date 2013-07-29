@@ -22,10 +22,21 @@ class UserController extends AbstractActionController
     
     public function indexAction()
     {   
+        // grab the paginator from the AlbumTable
+        $paginator = $this->getUserTable()->fetchAll(true);
+        // set the current page to what has been passed in query string, or to 1 if none set
+        $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+        // set the number of items per page to 10
+        $paginator->setItemCountPerPage(12);
+
         return new ViewModel(array(
+            'paginator' => $paginator
+        ));        
+        
+        /* return new ViewModel(array(
             'users' => 
                 $this->getUserTable()->fetchAll(),
-        ));        
+        ));   */     
     }
 
 
@@ -96,6 +107,15 @@ class UserController extends AbstractActionController
     {
     }
     
+    public function viewAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $user = $this->getUserTable()->getUser($id);  
+        
+        return new ViewModel(array(
+            'user' => $user
+        )); 
+    }
+
     public function getUserTable()
     {
         if (!$this->userTable) {

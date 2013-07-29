@@ -17,6 +17,14 @@ use Zend\Db\TableGateway\TableGateway;
 
 use Zend\ModuleManager\ModuleManager;
 
+use Backoffice\Service\ErrorHandling as ErrorHandlingService;
+use Zend\Log\Logger;
+use Zend\Log\Writer\Stream as LogWriterStream;
+
+use Zend\Session\Config\SessionConfig;
+use Zend\Session\SessionManager;
+use Zend\Session\Container;
+
 class Module
 {
     
@@ -38,17 +46,20 @@ class Module
      */
     public function onBootstrap(MvcEvent $event)
     {
-        
+
+    
         #$controller = $this->getRequest()->getControllerName();
         #$action = $this->getRequest()->getActionName();
 
         $application = $event->getApplication();
         $serviceManager = $application->getServiceManager();
         $auth = $serviceManager->get('authService');
-        $routeMatch = $event->getRouteMatch();
         
+        $dbAdapter          = $serviceManager->get('Zend\Db\Adapter\Adapter');
+        
+        #$routeMatch = $event->getRouteMatch();
         #$request = $application->getRequest()->getMethod(); 
-        $request = $application->getRequest()->getRequestUri(); 
+        #$request = $application->getRequest()->getRequestUri(); 
         #print_r($request);
         
         #if ( !$auth->hasIdentity() && $routeMatch->getMatchedRouteName() != 'user/login' ) {
@@ -62,12 +73,50 @@ class Module
         $eventManager        = $event->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        
+        $eventManager->attach('dispatch.error', function($event) use ($serviceManager) {
+            $exception = $event->getResult()->exception;
+            if (!$exception) {
+                return;               
+            }
+            $sm = $event->getApplication()->getServiceManager();
+            $service = $sm->get('Backoffice\Service\ErrorHandling');
+            $service->logException($exception);            
+        });
+        
+        $this->bootstrapSession($event);
+        
     }
     
 
+    
+    public function bootstrapSession(MvcEvent $event) 
+    {
+        $config = $event->getApplication()->getServiceManager()->get('Configuration');
+        
+        $sessionConfig = new SessionConfig();
+        $sessionConfig->setOptions($config['session']);
+        $sessionManager = new SessionManager($sessionConfig);
+        $sessionManager->start();        
+    }
+    
+    
     public function getConfig()
     {
-        return include __DIR__ . '/config/module.config.php';
+        $config = array();
+        $configFiles = array(
+                __DIR__ . '/config/module.config.php', // Default config
+                __DIR__ . '/config/module.config.routes.php', // Routes
+                __DIR__ . '/config/module.config.navigation.php', // Navigation
+                __DIR__ . '/config/module.config.session.php', // Session
+            );
+
+            // Merge all module config options
+            foreach ($configFiles as $configFile) {
+                $config = \Zend\Stdlib\ArrayUtils::merge($config, include $configFile);
+            }
+
+            return $config;  
     }
 
     public function getControllerPluginConfig() {
@@ -102,6 +151,18 @@ class Module
                 'authService2' => 'Backoffice\Service\AuthService'
             ), 
             'factories' => array(
+                'Backoffice\Service\ErrorHandling' =>  function($sm) {
+                    $logger = $sm->get('Zend\Log');
+                    $service = new ErrorHandlingService($logger);
+                    return $service;
+                },
+                'Zend\Log' => function ($sm) {
+                    $filename = 'log_' . date('Y-m-d') . '.txt';
+                    $log = new Logger();
+                    $writer = new LogWriterStream('./data/logs/' . $filename);
+                    $log->addWriter($writer);
+                    return $log;
+                },        
                 'Backoffice\Model\UserTable' =>  function($sm) {
                     $tableGateway = $sm->get('UserTableGateway');
                     $table = new UserTable($tableGateway);

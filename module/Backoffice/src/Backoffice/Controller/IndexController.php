@@ -5,7 +5,7 @@ namespace Backoffice\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-
+use Zend\Session\Container;
 use Backoffice\Form\Login;
 
 class IndexController extends AbstractActionController
@@ -27,7 +27,8 @@ class IndexController extends AbstractActionController
         if ( !$this->authService->hasIdentity()) 
             $this->redirect()->toUrl('/backoffice/auth/login');
 
-
+        $user_session = new Container('user');
+        $username = $user_session->username;
 
         
         \Locale::setDefault('en_EN');
@@ -35,7 +36,10 @@ class IndexController extends AbstractActionController
         
         
         return new ViewModel(
-            array('greeting' => $this->greetingService->getGreeting())
+            array(
+                'greeting' => $this->greetingService->getGreeting(),
+                'username' => $username
+                )
         );
     }
 
