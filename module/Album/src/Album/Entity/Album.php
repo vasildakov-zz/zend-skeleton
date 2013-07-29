@@ -78,6 +78,7 @@ class Album implements InputFilterAwareInterface {
         $this->title = $data['title'];
     }
 
+    
     public function setInputFilter(InputFilterInterface $inputFilter) {
         throw new \Exception("Not used");
     }

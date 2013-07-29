@@ -12,6 +12,7 @@
         "zendframework/zendframework": "2.*",
         "zendframework/zend-developer-tools": "dev-master",
         "doctrine/doctrine-orm-module": "0.*",
+        "propel/propel1": "~1.6",
         "bjyoungblood/bjy-profiler": "dev-master"
         
     }

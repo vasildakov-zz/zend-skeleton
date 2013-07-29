@@ -6,6 +6,9 @@ namespace Backoffice;
 use Backoffice\Model\User;
 use Backoffice\Model\UserTable;
 
+use Backoffice\Model\Site;
+use Backoffice\Model\SiteTable;
+
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -84,21 +87,21 @@ class Module
             $service->logException($exception);            
         });
         
-        $this->bootstrapSession($event);
+        #$this->bootstrapSession($event);
         
     }
     
 
     
-    public function bootstrapSession(MvcEvent $event) 
+    /* public function bootstrapSession(MvcEvent $event) 
     {
         $config = $event->getApplication()->getServiceManager()->get('Configuration');
-        
         $sessionConfig = new SessionConfig();
         $sessionConfig->setOptions($config['session']);
+        
         $sessionManager = new SessionManager($sessionConfig);
-        $sessionManager->start();        
-    }
+        $sessionManager->start();   
+    } */
     
     
     public function getConfig()
@@ -174,6 +177,17 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new User());
                     return new TableGateway('user', $dbAdapter, null, $resultSetPrototype);
                 },
+                'Backoffice\Model\SiteTable' =>  function($sm) {
+                    $tableGateway = $sm->get('SiteTableGateway');
+                    $table = new SiteTable($tableGateway);
+                    return $table;
+                },  
+                'SiteTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Site());
+                    return new TableGateway('site', $dbAdapter, null, $resultSetPrototype);
+                },                  
             ),
         );    
     }

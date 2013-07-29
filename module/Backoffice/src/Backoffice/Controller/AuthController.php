@@ -64,8 +64,8 @@ class AuthController extends AbstractActionController {
                 }
                 else
                     #$this->redirect()->toUrl('backoffice');
-                    $user_session = new Container('user');
-                    $user_session->username = 'vasil.dakov';    
+                    $session = new Container('user');
+                    $session->username = $this->authService->getAdapter()->getIdentity();
                     
                     return $this->redirect()->toRoute('backoffice');
                     

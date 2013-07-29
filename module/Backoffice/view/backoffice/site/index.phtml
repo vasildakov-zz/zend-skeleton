@@ -5,3 +5,16 @@ $title = 'Backoffice / Site::index';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<table class="table table-striped">
+<?php foreach ($this->paginator as $site) : ?>
+    <tr>
+        <td><?=$site->id;?></td>
+        <td><?=$site->url;?></td>
+    </tr>
+<?php endforeach; ?>
+</table>
+
+
+<?php echo $this->paginationControl($this->paginator, 'sliding', array('partial/paginator.phtml', 'Backoffice'), array('route' => 'site'));
+?>

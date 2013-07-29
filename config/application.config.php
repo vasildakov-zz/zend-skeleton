@@ -3,6 +3,7 @@ return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
         'Application',
+        'Admin',
         'ZendDeveloperTools',
         'DoctrineModule',
         'DoctrineORMModule',
@@ -68,8 +69,8 @@ return array(
    // Initial configuration with which to seed the ServiceManager.
    // Should be compatible with Zend\ServiceManager\Config.
    // 'service_manager' => array(),
-    // Doctrine config
-    'doctrine' => array(
+   // Doctrine config
+   /*'doctrine' => array(
         'driver' => array(
             __NAMESPACE__ . '_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
@@ -82,5 +83,5 @@ return array(
                 )
             )
         )
-    ) 
+    ),*/
 );

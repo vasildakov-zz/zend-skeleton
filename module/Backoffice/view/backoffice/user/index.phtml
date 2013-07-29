@@ -5,10 +5,10 @@ $title = 'Backoffice / User::index';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
-<?print_r($this->username);?>
+<p> sesion: <?php print_r($username); ?></p>
 
 <p>
-    <a href="<?php echo $this->url('user', array('action'=>'add'));?>"><?php echo $this->translate("Add new user"); ?></a>
+    <a class="btn btn-success" href="<?php echo $this->url('user', array('action'=>'add'));?>"><?php echo $this->translate("Add new user"); ?></a>
 </p>
 
 <table class="table table-striped">

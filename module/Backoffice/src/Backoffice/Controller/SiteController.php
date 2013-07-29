@@ -15,10 +15,35 @@ class SiteController extends AbstractActionController
 {
     protected $siteTable;
     
-    public function indexAction()
+    public function indexAction() {
+        
+        // grab the paginator from the AlbumTable
+        $paginator = $this->getSiteTable()->fetchAll(true);
+        // set the current page to what has been passed in query string, or to 1 if none set
+        $paginator->setCurrentPageNumber((int)$this->params()->fromQuery('page', 1));
+        // set the number of items per page to 10
+        $paginator->setItemCountPerPage(12);
+
+        return new ViewModel(array(
+            'paginator' => $paginator
+        ));          
+    }
+
+    
+    
+    public function getSiteTable()
+    {
+        if (!$this->siteTable) {
+            $sm = $this->getServiceLocator();
+            $this->siteTable = $sm->get('Backoffice\Model\SiteTable');
+        }
+        return $this->siteTable;
+    }
+    
+    
+    public function doctrineIndexAction()
     {   
         $id = 53;
-        
         /* using DQL*/
         $em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         #$qb = $em->createQueryBuilder()->select(array('u', 's'))->from('Backoffice\Entity\User', 'u')->where('u.id = 53')->leftJoin('u.site', 's');

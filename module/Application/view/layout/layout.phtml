@@ -1,9 +1,19 @@
 <?php echo $this->doctype(); ?>
+<?php         
+$url = $_SERVER['HTTP_HOST'];
+$arr = explode(".", $url);
+$subdomain = array_shift($arr);
+#var_dump($subdomain);
 
+#$url = parse_url($url, PHP_URL_HOST);
+#$url = strstr(str_replace("www.","",$url), ".",true);
+#var_dump($url);
+?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php #echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headTitle('ZF2 '. $subdomain)->setSeparator(' - ')->setAutoEscape(false) ?>
 
         <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
 
@@ -28,7 +38,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Skeleton Application') ?></a>
+                    <a class="brand" href="<?php echo $this->url('home') ?>">
+                        <?php #echo $this->translate('Skeleton Application') ?>
+                        <?php echo ucfirst($subdomain). ' Application' ?>
+                        
+                    </a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
@@ -40,7 +54,7 @@
                 </div>
             </div>
         </div>
-        
+
         <?php #echo $this->navigation('navigation')->menu(); ?>
         <?php #echo $this->navigation('navigation')->menu();?>
         

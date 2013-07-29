@@ -11,6 +11,8 @@ use Backoffice\Form\UserForm;
 use Zend\Form\Element;
 use Zend\Form\Form;
 
+use Zend\Session\Container;
+
 # Doctrine Entity
 #use Backoffice\Entity\User;
 #use Doctrine\ORM\EntityManager;
@@ -22,6 +24,9 @@ class UserController extends AbstractActionController
     
     public function indexAction()
     {   
+        $session = new Container('user');
+        $username = $session->username;
+        
         // grab the paginator from the AlbumTable
         $paginator = $this->getUserTable()->fetchAll(true);
         // set the current page to what has been passed in query string, or to 1 if none set
@@ -30,7 +35,8 @@ class UserController extends AbstractActionController
         $paginator->setItemCountPerPage(12);
 
         return new ViewModel(array(
-            'paginator' => $paginator
+            'paginator' => $paginator,
+            'username' =>  $username
         ));        
         
         /* return new ViewModel(array(

@@ -28,15 +28,5 @@ class Site
      */
     private $url;
 
-    /**
-     * @var \Backoffice\Entity\User
-     *
-     * @ORM\ManyToOne(targetEntity="Backoffice\Entity\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * })
-     */
-    private $user;
-
 
 }

@@ -55,12 +55,7 @@ class User
      * @ORM\Column(name="status", type="smallint", nullable=true)
      */
     private $status;
-    
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Site", mappedBy="user", cascade={"persist", "remove", "merge"}, orphanRemoval=true)
-     */
-    public $site;
+
 
 
     /**

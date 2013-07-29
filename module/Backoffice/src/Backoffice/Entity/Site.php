@@ -28,16 +28,6 @@ class Site
      */
     private $url;
 
-    /**
-     * @var \Backoffice\Entity\User
-     *
-     * @ORM\ManyToOne(targetEntity="Backoffice\Entity\User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * })
-     */
-    private $user;
-
 
 
     /**
@@ -71,28 +61,5 @@ class Site
     public function getUrl()
     {
         return $this->url;
-    }
-
-    /**
-     * Set user
-     *
-     * @param \Backoffice\Entity\User $user
-     * @return Site
-     */
-    public function setUser(\Backoffice\Entity\User $user = null)
-    {
-        $this->user = $user;
-    
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Backoffice\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
     }
 }
