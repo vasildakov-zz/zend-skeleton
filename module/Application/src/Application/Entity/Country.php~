@@ -1,0 +1,67 @@
+<?php
+
+namespace Application\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Country
+ *
+ * @ORM\Table(name="country")
+ * @ORM\Entity
+ */
+class Country
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="iso", type="string", length=2, nullable=false)
+     */
+    private $iso;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=80, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nicename", type="string", length=80, nullable=false)
+     */
+    private $nicename;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="iso3", type="string", length=3, nullable=true)
+     */
+    private $iso3;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numcode", type="smallint", nullable=true)
+     */
+    private $numcode;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="phonecode", type="integer", nullable=false)
+     */
+    private $phonecode;
+
+
+}

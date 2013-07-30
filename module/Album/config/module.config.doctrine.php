@@ -2,8 +2,7 @@
 namespace Album;
 
 return array(
-    // Doctrine config
-    'doctrine' => array(
+    /* 'doctrine' => array(
         'driver' => array(
             __NAMESPACE__ . '_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
@@ -16,5 +15,5 @@ return array(
                 ),
             ),
         ),
-    ), 
+    ), */
 );

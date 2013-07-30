@@ -42,7 +42,17 @@ return array(
                                 'action' => 'index'
                             )
                         ),                    
-                    ),                    
+                    ),   
+                    'user' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/user[/:action][/:id]',
+                            'defaults' => array(
+                                'controller' => 'Admin\Controller\User',
+                                'action' => 'index'
+                            )
+                        ),                    
+                    ),                       
                     'theme' => array(
                         'type' => 'segment',
                         'options' => array(

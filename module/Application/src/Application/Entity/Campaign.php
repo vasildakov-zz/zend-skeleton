@@ -5,12 +5,12 @@ namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * System
+ * Campaign
  *
- * @ORM\Table(name="system")
+ * @ORM\Table(name="campaign")
  * @ORM\Entity
  */
-class System
+class Campaign
 {
     /**
      * @var integer
@@ -24,26 +24,19 @@ class System
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
-     * @var \DateTime
+     * @var integer
      *
-     * @ORM\Column(name="created", type="datetime", nullable=true)
+     * @ORM\Column(name="system_id", type="integer", nullable=false)
      */
-    private $created;
+    private $systemId;
 
-    /** @ORM\OneToMany(targetEntity="User", mappedBy="system") */
-    private $users;
-    
 
-    public function getUsers() 
-    { 
-        return $this->users; 
-    }
-    
+
     /**
      * Get id
      *
@@ -58,7 +51,7 @@ class System
      * Set name
      *
      * @param string $name
-     * @return System
+     * @return Campaign
      */
     public function setName($name)
     {
@@ -78,25 +71,25 @@ class System
     }
 
     /**
-     * Set created
+     * Set systemId
      *
-     * @param \DateTime $created
-     * @return System
+     * @param integer $systemId
+     * @return Campaign
      */
-    public function setCreated($created)
+    public function setSystemId($systemId)
     {
-        $this->created = $created;
+        $this->systemId = $systemId;
     
         return $this;
     }
 
     /**
-     * Get created
+     * Get systemId
      *
-     * @return \DateTime 
+     * @return integer 
      */
-    public function getCreated()
+    public function getSystemId()
     {
-        return $this->created;
+        return $this->systemId;
     }
 }

@@ -9,6 +9,7 @@ return array(
         'invokables' => array(
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
             'Admin\Controller\System' => 'Admin\Controller\SystemController',
+            'Admin\Controller\User' => 'Admin\Controller\UserController',
             'Admin\Controller\Theme' => 'Admin\Controller\ThemeController',
         ),
     ),  

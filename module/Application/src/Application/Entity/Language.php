@@ -5,12 +5,12 @@ namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * System
+ * Language
  *
- * @ORM\Table(name="system")
+ * @ORM\Table(name="language")
  * @ORM\Entity
  */
-class System
+class Language
 {
     /**
      * @var integer
@@ -28,22 +28,8 @@ class System
      */
     private $name;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created", type="datetime", nullable=true)
-     */
-    private $created;
 
-    /** @ORM\OneToMany(targetEntity="User", mappedBy="system") */
-    private $users;
-    
 
-    public function getUsers() 
-    { 
-        return $this->users; 
-    }
-    
     /**
      * Get id
      *
@@ -58,7 +44,7 @@ class System
      * Set name
      *
      * @param string $name
-     * @return System
+     * @return Language
      */
     public function setName($name)
     {
@@ -75,28 +61,5 @@ class System
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     * @return System
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-    
-        return $this;
-    }
-
-    /**
-     * Get created
-     *
-     * @return \DateTime 
-     */
-    public function getCreated()
-    {
-        return $this->created;
     }
 }

@@ -1,0 +1,61 @@
+<?php
+// module/Admin/view/admin/user/index.phtml:
+$title = 'User Index';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+#$form = $this->form;
+#$form->prepare();
+#echo $this->form()->openTag($form);
+?>
+<div class="controls controls-row">
+    <div class="span4"><?php #echo $this->formRow($form->get('name')); ?></div>
+    <div class="span2"><?php #echo $this->formSubmit($form->get('submit')); ?></div>
+</div>
+
+<?php #echo $this->form()->closeTag(); ?>
+
+<table class="table">
+    <tr>
+        <th><input type="checkbox"></th>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>System</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    <?php foreach ($paginator as $user) : ?>
+        <tr>
+            <td><input type="checkbox"></td>
+            <td><?php echo $this->escapeHtml($user->getId()); ?></td>
+            <td><a href="#"><?php echo $this->escapeHtml($user->getUsername()); ?></a></td>
+            <td><?php echo $this->escapeHtml($user->getEmail()); ?></td>
+            <td><?php echo $user->getRole()->getName(); ?></td>
+            <td><?php echo $user->getSystem()->getName(); ?></td>
+            <td><?php echo $this->decorator->decorateStatus( (int)$user->getStatus() );?></td>
+            <td>
+                <div class="btn-group pull-right">
+                    <button class="btn btn-small dropdown-toggle" data-toggle="dropdown"><?php echo $this->translate("Action"); ?> <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo $this->url('admin/user', array('action' => 'view', 'id' => $user->getId())); ?>"><?php echo $this->translate("View"); ?></a></li>
+                        <li><a href="<?php echo $this->url('admin/user', array('action' => 'edit', 'id' => $user->getId())); ?>"><?php echo $this->translate("Edit"); ?></a></li>
+                        <li><a href="<?php echo $this->url('admin/user', array('action' => 'delete', 'id' => $user->getId())); ?>"><?php echo $this->translate("Delete"); ?></a></li>
+                    </ul>
+                </div> 
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+<?php // add at the end of the file after the table
+echo $this->paginationControl(
+    $this->paginator,
+    'sliding',
+    array('partial/paginator.phtml', 'Application'),
+    array('route' => 'admin/user')
+);
+?>

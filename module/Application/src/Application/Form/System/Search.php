@@ -5,6 +5,8 @@ use Zend\Form\Form;
 
 class Search extends Form
 {
+    private $name;
+    
     public function __construct($name = null)
     {
         // we want to ignore the name passed

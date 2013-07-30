@@ -7,6 +7,15 @@ $this->headTitle($title);
 
 <?php print_r($system->getName() ); ?>
 
+
+<?php 
+    $users = $system->getUsers();
+    foreach($users as $user):  ?>
+        <p><b><?php echo $user->getUsername()?></b>, <?php echo $user->getEmail()?></p>
+<?php endforeach;
+?>
+
+
 <h2>System objects</h2>
 
 <h3>Users</h3>
@@ -16,5 +25,8 @@ $this->headTitle($title);
     <li>Affiliates</li>
 </ul>
 
+<h3>Sites</h3>
+
 <h3>Campaigns</h3>
+
 <h3>Campaigns / Rates</h3>
