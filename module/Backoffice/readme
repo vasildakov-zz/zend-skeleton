@@ -2,7 +2,10 @@ Zend Framework 2 : Generate Doctrine Entities from Existing Database using Doctr
 http://samsonasik.wordpress.com/2013/04/10/zend-framework-2-generate-doctrine-entities-from-existing-database-using-doctrinemodule-and-doctrineormmodule/
 
 ./vendor/doctrine/doctrine-module/bin/doctrine-module orm:convert-mapping --namespace="Backoffice\\Entity\\" --force  --from-database annotation ./module/Backoffice/src/
+./vendor/doctrine/doctrine-module/bin/doctrine-module orm:convert-mapping --namespace="Application\\Entity\\" --force  --from-database annotation ./module/Application/src/
+
 ./vendor/doctrine/doctrine-module/bin/doctrine-module orm:generate-entities ./module/Backoffice/src/ --generate-annotations=true
+./vendor/doctrine/doctrine-module/bin/doctrine-module orm:generate-entities ./module/Application/src/ --generate-annotations=true
 
 
 Useful Doctrine 2 Console Commands

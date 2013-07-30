@@ -67,10 +67,32 @@ return array(
             ),
         ),
     ),
+    'doctrine' => array(
+        'driver' => array(
+            // __NAMESPACE__ . '_driver' => array(
+                'Application_driver' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                // 'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
+                'paths' => array(__DIR__ . '/../src/Application/Entity')
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    // __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                    'Application\Entity' => 'Application_driver'
+                ),
+            ),
+        ),
+    ),    
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             //'Application\Controller\Auth' => 'Application\Controller\AuthController'
+        ),
+    ),
+    'controller_plugins' => array(
+        'invokables' => array(
+            'DecoratorPlugin' => 'Application\Controller\Plugin\DecoratorPlugin',
         ),
     ),
     'view_manager' => array(

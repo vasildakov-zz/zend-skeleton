@@ -1,6 +1,6 @@
 <?php
 
-namespace Album\Entity;
+namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,7 +15,7 @@ class Album
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -24,16 +24,17 @@ class Album
     /**
      * @var string
      *
-     * @ORM\Column(name="artist", type="string", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="artist", type="string", length=100, nullable=false)
      */
     private $artist;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", precision=0, scale=0, nullable=false, unique=false)
+     * @ORM\Column(name="title", type="string", length=100, nullable=false)
      */
     private $title;
+
 
 
     /**

@@ -1,0 +1,20 @@
+<?php
+// module/Admin/view/admin/system/view.phtml:
+$title = 'System View';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php print_r($system->getName() ); ?>
+
+<h2>System objects</h2>
+
+<h3>Users</h3>
+<ul>
+    <li>Owner</li>
+    <li>Managers</li>
+    <li>Affiliates</li>
+</ul>
+
+<h3>Campaigns</h3>
+<h3>Campaigns / Rates</h3>

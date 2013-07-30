@@ -3,8 +3,14 @@ http://phpunit.de/manual/3.7/en/installation.html
 http://stackoverflow.com/questions/8949963/phpunit-pear-upgrading-errors
 
 pear config-set auto_discover 1
+pear clear-cache
+pear update-channels
 pear install pear.phpunit.de/PHPUnit
 
 (2)
 http://www.theantichris.com/2013/02/setting-up-phpunit-in-windows/
+
+
+(3) Unit Testing
+http://framework.zend.com/manual/2.1/en/tutorials/unittesting.html
 

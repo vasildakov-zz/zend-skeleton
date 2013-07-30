@@ -17,6 +17,7 @@
         <script type='text/javascript' src="/assets/jquery/1.9.1/jquery.min.js"></script>
         <script type='text/javascript' src="/assets/bootstrap/2.3.2/js/bootstrap.min.js"></script>
         <script type='text/javascript' src="/assets/highcharts/3.0.0/highcharts.js"></script>
+        <script type='text/javascript' src="/assets/jquery-countup/jquery.countup.js"></script>
         
         <?php /* echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
                           ->prependFile($this->basePath() . '/assets/bootstrap/2.3.2/js/bootstrap.min.js','text/javascript')
@@ -36,11 +37,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="brand" href="#"><?php echo $this->translate('Admin'); ?></a>
+                    <a class="brand" href="#"><?php echo $this->translate('Admin BackOffice'); ?></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#about">About</a></li>
+                            <li class="active"><a href="<?php echo $this->url('admin/home') ?>"><?php echo $this->translate('Dashboard');?></a></li>
+                            <li><a href="<?php echo $this->url('admin/system') ?>"><?php echo $this->translate('System');?></a></li>
                             <li><a href="#contact">Contact</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $this->translate('Dropdown') ?></a>
@@ -62,7 +63,10 @@
             <?php echo $content; ?>            
         </div>
     
-    <?php echo $this->inlineScript()->prependFile($this->basePath() . '/themes/admin/default/1.0/js/charts.js') ?>
+    <?php echo $this->inlineScript()
+            ->prependFile($this->basePath() . '/themes/admin/default/1.0/js/charts.js') 
+            ->prependFile($this->basePath() . '/themes/admin/default/1.0/js/plugins.js') 
+            ?>
     </body>
 </html>
 

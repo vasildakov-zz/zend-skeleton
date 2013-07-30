@@ -11,7 +11,7 @@ class Login extends Form {
         parent::__construct('login');
         $this->setAttribute('action', '/backoffice/auth/login');
         $this->setAttribute('method', 'post');
-        $this->setAttribute('class', 'form-signin');
+        $this->setAttribute('class', 'form-signin form-horizontal');
         
         $this->setInputFilter(new \Backoffice\Form\LoginFilter());
 
@@ -21,7 +21,6 @@ class Login extends Form {
                 'type' => 'text',
             ),
             'options' => array(
-                'label' => 'Username:',
             )
         ));
 
@@ -31,7 +30,6 @@ class Login extends Form {
                 'type' => 'password',
             ),
             'options' => array(
-                'label' => 'Password:'
             ),
         ));
 
@@ -39,7 +37,7 @@ class Login extends Form {
             'name' => 'submit',
             'attributes' => array(
                 'type' => 'submit',
-                'class' => 'btn btn-success',
+                'class' => 'btn',
                 'value' => 'Login'
             ),
         ));

@@ -32,6 +32,16 @@ return array(
                                 'action' => 'index'
                             )
                         ),                    
+                    ),  
+                    'system' => array(
+                        'type' => 'segment',
+                        'options' => array(
+                            'route' => '/system[/:action][/:id]',
+                            'defaults' => array(
+                                'controller' => 'Admin\Controller\System',
+                                'action' => 'index'
+                            )
+                        ),                    
                     ),                    
                     'theme' => array(
                         'type' => 'segment',

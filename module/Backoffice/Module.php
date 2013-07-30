@@ -93,15 +93,15 @@ class Module
     
 
     
-    /* public function bootstrapSession(MvcEvent $event) 
+   public function bootstrapSession(MvcEvent $event) 
     {
-        $config = $event->getApplication()->getServiceManager()->get('Configuration');
+        /* $config = $event->getApplication()->getServiceManager()->get('Configuration');
         $sessionConfig = new SessionConfig();
         $sessionConfig->setOptions($config['session']);
         
         $sessionManager = new SessionManager($sessionConfig);
-        $sessionManager->start();   
-    } */
+        $sessionManager->start();   */
+    }
     
     
     public function getConfig()
