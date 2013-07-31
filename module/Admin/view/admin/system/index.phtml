@@ -4,39 +4,52 @@ $title = 'System Index';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
-	<div id="jq_count_up"></div>
+	<div id="_jq_count_up"></div>
 
 <?php
 $form = $this->form;
 $form->prepare();
-echo $this->form()->openTag($form);
 ?>
-<div class="controls controls-row">
-    <div class="span4"><?php echo $this->formRow($form->get('name')); ?></div>
-    <div class="span2"><?php echo $this->formSubmit($form->get('submit')); ?></div>
+<div class="navbar">
+    <?php echo $this->form()->openTag($form);?>
+    <?php echo $this->formRow($form->get('name')); ?></div>
+    <?php #echo $this->formSubmit($form->get('submit')); ?>
+    <?php echo $this->form()->closeTag(); ?>
 </div>
 
-<?php echo $this->form()->closeTag(); ?>
+
 
 <table class="table">
-    <tr>
-        <th><input type="checkbox"></th>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Created</th>
-        <th>Status</th>
-        <th>Actions</th>
-    </tr>
+    <thead>
+        <tr>
+            <th><input type="checkbox"></th>
+            <th>ID</th>
+            <th>System</th>
+            <th>Owner</th>
+            <th>Users</th>
+            <th>Sites</th>
+            <th>Campaigns</th>
+            <th>System Created</th>
+            <th>System Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
     <?php foreach ($paginator as $system) : ?>
         <tr>
             <td><input type="checkbox"></td>
             <td><?php echo $this->escapeHtml($system->getId()); ?></td>
             <td><a href="#"><?php echo $this->escapeHtml($system->getName()); ?></a></td>
-            <td><?php echo $this->dateFormat($system->getCreated(), IntlDateFormatter::MEDIUM); ?></td>
+            <th><?php echo $this->systemPlugin->getOwnerName($system->getId()); ?></th>
+            <td><?php echo $this->systemPlugin->countSystemUsers($system->getId()); ?></td>
+            <td>0</td>
+            <td>0</td>
+            <td><?php echo $this->dateFormat($system->getCreated(), IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM); ?></td>
             <td><?php echo $this->decorator->decorateStatus(rand(1,2));?></td>
             <td>
                 <div class="btn-group pull-right">
-                    <button class="btn btn-small dropdown-toggle" data-toggle="dropdown"><?php echo $this->translate("Action"); ?> <span class="caret"></span></button>
+                    <button class="btn btn-default btn-small dropdown-toggle" data-toggle="dropdown"><?php echo $this->translate("Action"); ?></button>
+                    <button type="button" class="btn btn-small btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo $this->url('admin/system', array('action' => 'view', 'id' => $system->getId())); ?>"><?php echo $this->translate("View"); ?></a></li>
                         <li><a href="<?php echo $this->url('admin/system', array('action' => 'edit', 'id' => $system->getId())); ?>"><?php echo $this->translate("Edit"); ?></a></li>
@@ -46,6 +59,7 @@ echo $this->form()->openTag($form);
             </td>
         </tr>
     <?php endforeach; ?>
+        </tbody>
 </table>
 
 <?php // add at the end of the file after the table

@@ -25,6 +25,7 @@ class DecoratorPlugin extends AbstractPlugin {
             return '<span class="label label-important">'.$this->translator->translate("Inactive").'</span>';
         }
     }
+    
 
     
 }

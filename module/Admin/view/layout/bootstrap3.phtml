@@ -1,0 +1,75 @@
+<?php // module/Admin/view/layout/admin.phtml  ?>
+<?php echo $this->doctype(); ?>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+
+        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+
+        <!-- Styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/images/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/assets/bootstrap/3.0.0/css/bootstrap.min.css') 
+                        #->prependStylesheet($this->basePath() . '/themes/admin/default/1.0/css/style.css')
+                ?>
+        
+        <!--link type="text/css" rel="stylesheet" media="screen" href="/themes/admin/default/1.0/css/style.css" /-->
+        
+        <!-- Scripts -->
+        <script type='text/javascript' src="/assets/jquery/1.9.1/jquery.min.js"></script>
+        <script type='text/javascript' src="/assets/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script type='text/javascript' src="/assets/highcharts/3.0.0/highcharts.js"></script>
+        <script type='text/javascript' src="/assets/jquery-countup/jquery.countup.js"></script>
+        
+        <?php /* echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                          ->prependFile($this->basePath() . '/assets/bootstrap/2.3.2/js/bootstrap.min.js','text/javascript')
+                          ->prependFile($this->basePath() . '/assets/jquery/1.9.1/jquery.min.js','text/javascript') 
+                          ->prependFile($this->basePath() . '/assets/jquery/jquery-migrate-1.1.1.min.js','text/javascript') 
+                          ->prependFile($this->basePath() . '/assets/highcharts/3.0.0/highcharts.js','text/javascript'); */ ?>        
+        <style type="text/css">
+            body {
+              padding-top: 50px;
+              font-size: 12px;
+            }            
+        </style>
+    </head>
+
+    <body>
+        
+        <div class="navbar navbar-fixed-top navbar-inverse">
+            <div class="container">
+                <a class="navbar-brand" href="#"><?php echo $this->translate('Admin BackOffice'); ?></a>
+                
+                <div class="nav-collapse collapse navbar-inverse-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="<?php echo $this->url('admin/home') ?>"><?php echo $this->translate('Dashboard');?></a></li>
+                        <li><a href="<?php echo $this->url('admin/system') ?>"><?php echo $this->translate('System');?></a></li>
+                        <li><a href="<?php echo $this->url('admin/user') ?>"><?php echo $this->translate('User');?></a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo $this->translate('Dropdown') ?></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a tabindex="-1" href="#"><?php echo $this->translate('Action'); ?></a></li>      
+                                <li><a tabindex="-1" href="#"><?php echo $this->translate('Another action'); ?></a></li>
+                                <li><a tabindex="-1" href="#"><?php echo $this->translate('Something else here'); ?></a></li>
+                                <li class="divider"></li>
+                                <li><a tabindex="-1" href="#">Separated link</a></li>
+                            </ul>                              
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+        
+        <div class="main">
+            <?php echo $content; ?>            
+        </div>
+    
+    <?php echo $this->inlineScript()
+            ->prependFile($this->basePath() . '/themes/admin/default/1.0/js/charts.js') 
+            ->prependFile($this->basePath() . '/themes/admin/default/1.0/js/plugins.js') 
+            ?>
+    </body>
+</html>
+
+
+

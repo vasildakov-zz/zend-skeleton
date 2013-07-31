@@ -1,12 +1,5 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
+namespace Application;
 return array(
     'router' => array(
         'routes' => array(
@@ -55,6 +48,16 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+            'doctrine.cache.apc' => function(\Zend\ServiceManager\ServiceManager $sm) {
+                 return new \Doctrine\Common\Cache\ApcCache();
+            },
+            'doctrine.cache.memcache' => function(\Zend\ServiceManager\ServiceManager $sm) {
+                $cache = new \Doctrine\Common\Cache\MemcacheCache();
+                $memcache = new \Memcache();
+                $memcache->connect('localhost', 11211);
+                $cache->setMemcache($memcache);
+                return $cache;                
+            }
         ),
     ),
     'translator' => array(
@@ -72,7 +75,7 @@ return array(
             // __NAMESPACE__ . '_driver' => array(
                 'Application_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'array',
+                'cache' => 'apc',
                 // 'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
                 'paths' => array(__DIR__ . '/../src/Application/Entity')
             ),
@@ -92,6 +95,7 @@ return array(
     ),
     'controller_plugins' => array(
         'invokables' => array(
+            'SystemPlugin' => 'Application\Controller\Plugin\SystemPlugin',
             'DecoratorPlugin' => 'Application\Controller\Plugin\DecoratorPlugin',
         ),
     ),

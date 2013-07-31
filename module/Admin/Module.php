@@ -19,7 +19,8 @@ class Module
         $sharedEvents->attach(__NAMESPACE__, 'dispatch', function($e) {
             // This event will only be fired when an ActionController under the Backoffice namespace is dispatched.
             $controller = $e->getTarget();
-            $controller->layout('layout/admin');
+            // $controller->layout('layout/admin');
+            $controller->layout('layout/bootstrap3');
         }, 100);
     }
     

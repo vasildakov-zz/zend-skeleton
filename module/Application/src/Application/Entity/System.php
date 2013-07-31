@@ -35,15 +35,8 @@ class System
      */
     private $created;
 
-    /** @ORM\OneToMany(targetEntity="User", mappedBy="system") */
-    private $users;
-    
 
-    public function getUsers() 
-    { 
-        return $this->users; 
-    }
-    
+
     /**
      * Get id
      *

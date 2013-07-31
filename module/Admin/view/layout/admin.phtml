@@ -2,7 +2,7 @@
 <?php echo $this->doctype(); ?>
 <html lang="en">
     <head>
-        <meta charset="utf-8"></meta>
+        <meta charset="utf-8"/>
 
         <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
 
@@ -10,9 +10,9 @@
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/images/favicon.ico'))
                         ->prependStylesheet($this->basePath() . '/assets/bootstrap/2.3.2/css/bootstrap-responsive.min.css')
                         ->prependStylesheet($this->basePath() . '/assets/bootstrap/2.3.2/css/bootstrap.min.css') 
-                        ->prependStylesheet($this->basePath() . '/themes/admin/default/1.0/css/style.css')
+                        #->prependStylesheet($this->basePath() . '/themes/admin/default/1.0/css/style.css')
                 ?>
-
+        <link type="text/css" rel="stylesheet" media="screen" href="/themes/admin/default/1.0/css/style.css" />
         <!-- Scripts -->
         <script type='text/javascript' src="/assets/jquery/1.9.1/jquery.min.js"></script>
         <script type='text/javascript' src="/assets/bootstrap/2.3.2/js/bootstrap.min.js"></script>

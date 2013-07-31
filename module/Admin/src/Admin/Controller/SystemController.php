@@ -59,6 +59,7 @@ class SystemController extends AbstractActionController {
         // http://zf2pagination.lifencolor.com/public/album
 
         $decorator = $this->DecoratorPlugin();
+        $systemPlugin = $this->SystemPlugin();
         
         $form = new SearchForm();
         $page = $this->params()->fromRoute('page') ? (int) $this->params()->fromRoute('page') : 1;
@@ -66,8 +67,10 @@ class SystemController extends AbstractActionController {
         $request = $this->getRequest();
         if ($request->isPost()) {}
 
-        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        $repository = $entityManager->getRepository('Application\Entity\System');
+        #$entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        #$repository = $entityManager->getRepository('Application\Entity\System');
+        
+        $repository = $this->getEntityManager()->getRepository('Application\Entity\System');
         $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('system')));
         
         $paginator = new Paginator($adapter);
@@ -79,6 +82,7 @@ class SystemController extends AbstractActionController {
         $view = new ViewModel(array(
                     'form' => $form,
                     'paginator' => $paginator,
+                    'systemPlugin' => $systemPlugin,
                     'decorator' => $decorator
                 ));
 
@@ -142,5 +146,5 @@ class SystemController extends AbstractActionController {
             'system' => $system
         ));
         return $view;
-    }
+    }    
 }

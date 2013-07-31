@@ -35,7 +35,7 @@ $this->headTitle($title);
             <td><a href="#"><?php echo $this->escapeHtml($user->getUsername()); ?></a></td>
             <td><?php echo $this->escapeHtml($user->getEmail()); ?></td>
             <td><?php echo $user->getRole()->getName(); ?></td>
-            <td><?php echo $user->getSystem()->getName(); ?></td>
+            <td><a href="<?php echo $this->url('admin/system', array('action' => 'view', 'id' => $user->getSystem()->getId())); ?>"><?php echo $user->getSystem()->getName(); ?></a></td>
             <td><?php echo $this->decorator->decorateStatus( (int)$user->getStatus() );?></td>
             <td>
                 <div class="btn-group pull-right">

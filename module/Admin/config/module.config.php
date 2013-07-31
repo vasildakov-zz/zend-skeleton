@@ -5,6 +5,11 @@ return array(
     'console' => array(
         'router' => array(),
     ),
+    'session' => array(
+        'remember_me_seconds' => 2419200,
+        'use_cookies' => true,
+        'cookie_httponly' => true,        
+    ),
     'controllers' => array(
         'invokables' => array(
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
@@ -13,6 +18,10 @@ return array(
             'Admin\Controller\Theme' => 'Admin\Controller\ThemeController',
         ),
     ),  
+    'service_manager' => array(
+        'services' => array(
+        ),
+    ),    
     'view_manager' => array(
         'template_path_stack' => array(
             'admin' => __DIR__ . '/../view',

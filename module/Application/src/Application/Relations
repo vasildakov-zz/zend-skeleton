@@ -1,0 +1,45 @@
+class System
+{
+    /** @ORM\OneToMany(targetEntity="User", mappedBy="system") */
+    private $users;
+
+    public function getUsers() 
+    { 
+        return $this->users; 
+    }
+}
+
+class User
+{
+    /**
+     * @var \Application\Entity\System
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Entity\System")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="system_id", referencedColumnName="id")
+     * })
+     */
+    private $system;
+    /**
+     * Set system
+     *
+     * @param \Application\Entity\System $system
+     * @return User
+     */
+    public function setSystem(\Application\Entity\System $system = null)
+    {
+        $this->system = $system;
+    
+        return $this;
+    }
+
+    /**
+     * Get system
+     *
+     * @return \Application\Entity\System 
+     */
+    public function getSystem()
+    {
+        return $this->system;
+    }
+}

@@ -13,15 +13,15 @@ class Search extends Form
         parent::__construct('system');
         
         $this->setAttribute('method', 'get');
-        $this->setAttribute('class', 'form-inline');
-        
+        $this->setAttribute('class', 'form-inline navbar-form pull-left');
+        $this->setAttribute('style', '');
         
         $this->add(array(
             'name' => 'name',
             'attributes' => array(
                 'type'  => 'text',
-                'placeholder' => 'System name',
-                'class' => 'input-small'
+                'placeholder' => '',
+                'class' => 'form-control'
             ),
             'options' => array(
                 'label' => '',
@@ -31,13 +31,11 @@ class Search extends Form
         
         $this->add(array(
             'name' => 'submit',
-            'required' => false,
-            'allowEmpty' => true,
             'attributes' => array(
                 'type'  => 'submit',
                 'value' => 'Search',
                 'id' => 'submitbutton',
-                'class' => 'btn'
+                'class' => 'btn btn-primary btn-small'
             ),
         ));        
         
