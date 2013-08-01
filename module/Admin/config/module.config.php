@@ -36,5 +36,8 @@ return array(
             'flag' => 'GEOIP_STANDARD',
             'regionvars' => __DIR__ .'/../../../vendor/geoip/geoip/geoipregionvars.php',
         ),
-    ),        
+    ),      
+    'auth' => array(
+        'password_hash_type' => 'sha512',
+    ),
 );

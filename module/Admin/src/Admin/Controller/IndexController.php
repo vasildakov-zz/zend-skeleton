@@ -28,12 +28,21 @@ class IndexController extends AbstractActionController
     
     public function indexAction()
     {   
+
+        // just a geoip test
         $ip = "213.165.176.146";
         $gi = geoip_open("data/GeoIP.dat", GEOIP_STANDARD);
         $gc = geoip_open("data/GeoLiteCity.dat", GEOIP_STANDARD);     
-        
-        print_r(geoip_record_by_addr($gc, $ip) );
+        #print_r(geoip_record_by_addr($gc, $ip) );
         #echo geoip_country_code_by_addr($gi, $ip) . "\t";
+
+        
+        // see Admin/config/module.config.php
+        $config = $this->getServiceLocator()->get('Config');
+        $pwht = $config['auth']['password_hash_type'];
+        print_r($pwht);
+        
+        
         
         #$address = '1600 Amphitheatre Parkway, Mountain View, CA';
         #$request = new Request();
