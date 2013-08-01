@@ -21,7 +21,7 @@ class Search extends Form
             'attributes' => array(
                 'type'  => 'text',
                 'placeholder' => '',
-                'class' => 'form-control'
+                'class' => 'form-control input-small'
             ),
             'options' => array(
                 'label' => '',

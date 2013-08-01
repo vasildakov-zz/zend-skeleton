@@ -3,14 +3,14 @@
 $title = 'System Index';
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
 	<div id="_jq_count_up"></div>
 
 <?php
 $form = $this->form;
 $form->prepare();
 ?>
-<div class="navbar">
+<div class="navbar" style="min-height: 30px;">
     <?php echo $this->form()->openTag($form);?>
     <?php echo $this->formRow($form->get('name')); ?></div>
     <?php #echo $this->formSubmit($form->get('submit')); ?>
@@ -18,8 +18,9 @@ $form->prepare();
 </div>
 
 
-
-<table class="table">
+<div class="panel">
+    <div class="panel-heading">Panel heading</div>
+<table class="table table-hover table-striped">
     <thead>
         <tr>
             <th><input type="checkbox"></th>
@@ -41,15 +42,15 @@ $form->prepare();
             <td><?php echo $this->escapeHtml($system->getId()); ?></td>
             <td><a href="#"><?php echo $this->escapeHtml($system->getName()); ?></a></td>
             <th><?php echo $this->systemPlugin->getOwnerName($system->getId()); ?></th>
-            <td><?php echo $this->systemPlugin->countSystemUsers($system->getId()); ?></td>
+            <td><span class="badge"><?php echo $this->systemPlugin->countSystemUsers($system->getId()); ?></span></td>
             <td>0</td>
             <td>0</td>
             <td><?php echo $this->dateFormat($system->getCreated(), IntlDateFormatter::MEDIUM, IntlDateFormatter::MEDIUM); ?></td>
             <td><?php echo $this->decorator->decorateStatus(rand(1,2));?></td>
             <td>
                 <div class="btn-group pull-right">
-                    <button class="btn btn-default btn-small dropdown-toggle" data-toggle="dropdown"><?php echo $this->translate("Action"); ?></button>
-                    <button type="button" class="btn btn-small btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                    <button class="btn btn-mini btn-default dropdown-toggle" data-toggle="dropdown"><?php echo $this->translate("Action"); ?></button>
+                    <button class="btn btn-mini btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo $this->url('admin/system', array('action' => 'view', 'id' => $system->getId())); ?>"><?php echo $this->translate("View"); ?></a></li>
                         <li><a href="<?php echo $this->url('admin/system', array('action' => 'edit', 'id' => $system->getId())); ?>"><?php echo $this->translate("Edit"); ?></a></li>
@@ -61,6 +62,7 @@ $form->prepare();
     <?php endforeach; ?>
         </tbody>
 </table>
+</div>
 
 <?php // add at the end of the file after the table
 echo $this->paginationControl(
