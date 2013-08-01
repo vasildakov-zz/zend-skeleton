@@ -27,4 +27,14 @@ return array(
             'admin' => __DIR__ . '/../view',
         ),
     ),
+    
+    'maxmind' => array(
+        'database' => array(
+            'source' => 'http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz',
+            'destination' => __DIR__ . '/../data/',
+            'filename' => 'GeoLiteCity.dat',
+            'flag' => 'GEOIP_STANDARD',
+            'regionvars' => __DIR__ .'/../../../vendor/geoip/geoip/geoipregionvars.php',
+        ),
+    ),        
 );

@@ -45,7 +45,8 @@ class SystemController extends AbstractActionController {
     public function getEntityManager() 
     {
         if (null === $this->em) {
-            $this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+            #$this->em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+            $this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         }
         return $this->em;
     }
@@ -74,10 +75,17 @@ class SystemController extends AbstractActionController {
         $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('system')));
         
         $paginator = new Paginator($adapter);
-        $paginator->setDefaultItemCountPerPage(12);
+        $paginator->setDefaultItemCountPerPage(15);
 
         $page = (int)$this->params()->fromQuery('page');
         if($page) $paginator->setCurrentPageNumber($page);
+        
+        // setting variables to the layout
+        $this->layout()->setVariables(array(
+                    'var1' => 'Search form',
+                    'var2'  => 'Some value for another variable',
+        ));
+        
         
         $view = new ViewModel(array(
                     'form' => $form,

@@ -35,23 +35,25 @@ return array(
             },
         ),
     ),    
-    /*'doctrine' => array(
+    'doctrine' => array(
         'connection' => array(
-            'orm_default' => array(
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
-                'params' => array(
-                    'host'     => $dbParams['hostname'],
-                    'port'     => $dbParams['port'],
-                    'user'     => $dbParams['username'],
-                    'password' => $dbParams['password'],
-                    'dbname'   => $dbParams['database'],
+            'orm' => array(
+                'default' => array(
+                    'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                    'params' => array(
+                        'host'     => $dbParams['hostname'],
+                        'port'     => $dbParams['port'],
+                        'user'     => $dbParams['username'],
+                        'password' => $dbParams['password'],
+                        'dbname'   => $dbParams['database'],
+                    )
                 )
             )
         )
-    ), */   
+    ),   
     'db' => array(
         'username' => 'root',
-        'password' => '1',
+        'password' => '2',
     ),
 );
 

@@ -13,7 +13,7 @@
         "zendframework/zend-developer-tools": "dev-master",
         "doctrine/doctrine-orm-module": "0.*",
         "propel/propel1": "~1.6",
-        "bjyoungblood/bjy-profiler": "dev-master"
-        
+        "bjyoungblood/bjy-profiler": "dev-master",
+        "snapshotpl/zf-snap-geoip": "dev-master"
     }
 }

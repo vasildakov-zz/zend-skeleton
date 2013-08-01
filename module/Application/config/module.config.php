@@ -85,8 +85,14 @@ return array(
                     'Application\Entity' => 'Application_driver'
                 ),
             ),
+            'orm_customer' => array(
+                'drivers' => array(
+                    // __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
+                    'Application\Entity' => 'Application_driver' 
+                    )
+            )
         ),
-    ),    
+    ), 
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
