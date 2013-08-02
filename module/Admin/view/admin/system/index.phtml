@@ -55,6 +55,8 @@ $form->prepare();
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo $this->url('admin/system', array('action' => 'view', 'id' => $system->getId())); ?>"><?php echo $this->translate("View"); ?></a></li>
                         <li><a href="<?php echo $this->url('admin/system', array('action' => 'edit', 'id' => $system->getId())); ?>"><?php echo $this->translate("Edit"); ?></a></li>
+                        <li><a href="<?php echo $this->url('admin/system', array('action' => 'delete', 'id' => $system->getId())); ?>"><?php echo $this->translate("Deactivate"); ?></a></li>
+                        <li class="divider"></li>                        
                         <li><a href="<?php echo $this->url('admin/system', array('action' => 'delete', 'id' => $system->getId())); ?>"><?php echo $this->translate("Delete"); ?></a></li>
                     </ul>
                 </div> 

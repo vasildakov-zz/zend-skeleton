@@ -1,6 +1,25 @@
 <?php
 // module/Admin/view/admin/system/delete.phtml:
-$title = 'System Delete';
+$title = 'Delete system';
 $this->headTitle($title);
 ?>
+
 <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$url = $this->url('admin/system', array('action' => 'delete','id' => $this->id));
+?>
+<div class="container">
+	<div class="alert alert-danger">
+		<button class="close" data-dismiss="alert" type="button">×</button>
+		<h4>Oh snap! <?=$this->system->getId(); ?></h4>
+		<p>Change a few things up  and try submitting again.</p>
+		<form action="<?php echo $url; ?>" method="post">
+		<div>
+		    <input type="hidden" name="id" value="<?php echo (int) $this->system->getId(); ?>" />
+		    <input type="submit" class="btn btn-small btn-danger" name="del" value="Yes" />
+		    <input type="submit" class="btn btn-small btn-primary" name="del" value="No" />
+		</div>
+		</form>
+	</div>
+</div>

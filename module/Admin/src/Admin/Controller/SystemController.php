@@ -17,6 +17,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
+use DoctrineModule\Validator\NoObjectExists;
 
 use Zend\Paginator\Paginator as Paginator;
 
@@ -24,9 +25,10 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
 
-use Admin\Form\SystemForm;
+use Application\Form\System\SystemForm as SystemForm;
 use Application\Form\System\Search as SearchForm;
 
+use Application\Entity\System;
 
 class SystemController extends AbstractActionController {
 
@@ -63,6 +65,7 @@ class SystemController extends AbstractActionController {
         $systemPlugin = $this->SystemPlugin();
         
         $form = new SearchForm();
+        
         $page = $this->params()->fromRoute('page') ? (int) $this->params()->fromRoute('page') : 1;
         
         $request = $this->getRequest();
@@ -101,21 +104,40 @@ class SystemController extends AbstractActionController {
     public function searchAction() {}
     
     
+    // http://questiontrack.com/how-to-use-doctrinemodulevalidatornoobjectexists-in-edit-forms---zend-framework-2-amp-doctrine-2-1098290.html
+    // http://www.zf2.com.br/tutoriais/post/zf2-doctrine2-dbnorecordexists-vs-noobjectexists
+    // https://github.com/doctrine/DoctrineModule/blob/master/docs/validator.md
     
     public function addAction()
     {
         $form = new SystemForm();
+        $name = $form->getInputFilter()->get('name');
+        
+        $noObjectExistsValidator = new NoObjectExists(array(
+                'object_repository' => $this->getEntityManager()->getRepository('Application\Entity\System'),
+                'fields' => array(
+                    'name'
+                )
+        )); 
+        #$form->setInputFilter($noObjectExistsValidator);
+        $name->getValidatorChain()->addValidator($noObjectExistsValidator);
+        
         $form->get('submit')->setAttribute('label', 'Add');
 
         $request = $this->getRequest();
-        if ($request->isPost()) {
+
+        if ($request->isPost()) 
+        {
+            # new doctrine
             $system = new System();
+
             $form->setInputFilter($system->getInputFilter());
-            #$form->setData($request->post());
             $form->setData($request->getPost());
-            if ($form->isValid()) {
+
+            if ($form->isValid()) 
+            {
                 $system->populate($form->getData());
-                $this->getEntityManager()->persist($album);
+                $this->getEntityManager()->persist($system);
                 $this->getEntityManager()->flush();
 
                 // Redirect to list of albums
@@ -126,8 +148,10 @@ class SystemController extends AbstractActionController {
         $view = new ViewModel(array(
             'form' => $form
         ));
+
         return $view;
     }
+
 
     public function editAction()
     {
@@ -135,12 +159,42 @@ class SystemController extends AbstractActionController {
         return $view;
     }
 
+
     public function deleteAction()
     {
-        $view = new ViewModel(array());
+        $id = (int) $this->getEvent()->getRouteMatch()->getParam('id');
+        $system = $this->getEntityManager()->find('Application\Entity\System', $id);
+
+        $request = $this->getRequest();
+        
+        if ($request->isPost()) 
+        {
+            $del = $request->getPost()->get('del', 'No');
+            if ($del == 'Yes') {
+                $id = (int) $request->getPost()->get('id');
+                $system = $this->getEntityManager()->find('Application\Entity\System', $id);
+
+                if ($system) {
+                    $this->getEntityManager()->remove($system);
+                    $this->getEntityManager()->flush();
+                }
+            }      
+            // Redirect to list of Systems
+            return $this->redirect()->toRoute('admin/system');                  
+        }
+
+        #print_r($id);
+
+        $view = new ViewModel(array(
+            'id' => $id,
+            'system' => $system
+        ));
         return $view;
     }
     
+
+    public function deactivateAction() {}
+
     
     public function viewAction()
     {

@@ -16,4 +16,17 @@ $(document).ready(function(){
     $('[data-slidepanel]').click(function() {
         $('#slidepanel').slideToggle();
     });
+
+
+    $('#step').stepy({
+        finishButton : true
+        /* description:  true,
+        legend:       true,
+        titleClick:   false,
+        titleTarget:  '#title-target',
+        finishButton: false,
+        validate: false */
+    });
+
+
 });

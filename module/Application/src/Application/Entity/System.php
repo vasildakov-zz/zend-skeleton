@@ -4,14 +4,21 @@ namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+
 /**
  * System
  *
  * @ORM\Table(name="system")
  * @ORM\Entity
  */
-class System
+class System implements InputFilterAwareInterface
 {
+    protected $inputFilter;
+
     /**
      * @var integer
      *
@@ -86,7 +93,6 @@ class System
     public function setCreated($created)
     {
         $this->created = $created;
-    
         return $this;
     }
 
@@ -99,4 +105,68 @@ class System
     {
         return $this->created;
     }
+
+
+    /**
+     * Convert the object to an array.
+     *
+     * @return array
+     */
+    public function getArrayCopy() 
+    {
+        return get_object_vars($this);
+    }
+
+
+    /**
+     * Populate from an array.
+     *
+     * @param array $data
+     */
+    public function populate($data = array()) 
+    {
+        $this->id = $data['id'];
+        $this->name = $data['name'];
+    }        
+
+    public function setInputFilter(InputFilterInterface $inputFilter) {
+        throw new \Exception("Not used");
+    }
+
+
+    public function getInputFilter() 
+    {
+        if (!$this->inputFilter) 
+        {
+            $inputFilter = new InputFilter();
+
+            $factory = new InputFactory();
+
+            $inputFilter->add($factory->createInput(array(
+                        'name' => 'name',
+                        'required' => true,
+                        'filters' => array(
+                            array('name' => 'StripTags'),
+                            array('name' => 'StringTrim'),
+                        ),
+                        'validators' => array(
+                            array(
+                                'name' => 'StringLength',
+                                'options' => array(
+                                    'encoding' => 'UTF-8',
+                                    'min' => 1,
+                                    'max' => 100,
+                                ),
+                            ),
+                        ),
+                    )));    
+
+            $this->inputFilter = $inputFilter;      
+        }
+
+        return $this->inputFilter;
+    }
+
+
+
 }
