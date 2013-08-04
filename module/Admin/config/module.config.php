@@ -20,7 +20,11 @@ return array(
     ),  
     'service_manager' => array(
         'services' => array(
+            'user_search_form' => 'Application\Form\User\Search',
         ),
+        'factories' => array(
+            
+        ),        
     ),    
     'view_manager' => array(
         'template_path_stack' => array(

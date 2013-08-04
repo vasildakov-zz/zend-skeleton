@@ -81,7 +81,11 @@
             </div>
             
             <div id="slidepanel" style="background: #080808; width: 100%; height: 60px; margin-top: -10px; display: none; clear: both;">
-                <div><h4><?php echo $var1; ?></h4></div>
+                <div>
+                    <?php echo $this->partial('partial/form.user.search.phtml', array(
+                        'from' => 'Team Framework',
+                        'subject' => 'view partials')); ?>
+                </div>
             </div>
             
             <div class="">

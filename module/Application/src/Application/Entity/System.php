@@ -13,7 +13,7 @@ use Zend\InputFilter\InputFilterInterface;
  * System
  *
  * @ORM\Table(name="system")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Application\Repository\SystemRepository") 
  */
 class System implements InputFilterAwareInterface
 {
@@ -31,7 +31,7 @@ class System implements InputFilterAwareInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="name", type="string", length=255, nullable=true) 
      */
     private $name;
 
@@ -154,8 +154,8 @@ class System implements InputFilterAwareInterface
                                 'name' => 'StringLength',
                                 'options' => array(
                                     'encoding' => 'UTF-8',
-                                    'min' => 1,
-                                    'max' => 100,
+                                    'min' => 3,
+                                    'max' => 20,
                                 ),
                             ),
                         ),
@@ -170,3 +170,5 @@ class System implements InputFilterAwareInterface
 
 
 }
+
+

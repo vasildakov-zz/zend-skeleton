@@ -81,6 +81,31 @@ class System extends \Application\Entity\System implements \Doctrine\ORM\Proxy\P
         return parent::getCreated();
     }
 
+    public function getArrayCopy()
+    {
+        $this->__load();
+        return parent::getArrayCopy();
+    }
+
+    public function populate($data = array (
+))
+    {
+        $this->__load();
+        return parent::populate($data);
+    }
+
+    public function setInputFilter(\Zend\InputFilter\InputFilterInterface $inputFilter)
+    {
+        $this->__load();
+        return parent::setInputFilter($inputFilter);
+    }
+
+    public function getInputFilter()
+    {
+        $this->__load();
+        return parent::getInputFilter();
+    }
+
 
     public function __sleep()
     {

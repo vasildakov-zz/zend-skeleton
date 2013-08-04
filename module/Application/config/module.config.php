@@ -75,7 +75,7 @@ return array(
             // __NAMESPACE__ . '_driver' => array(
                 'Application_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'apc',
+                // 'cache' => 'apc',
                 // 'paths' => array(__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity')
                 'paths' => array(__DIR__ . '/../src/Application/Entity')
             ),

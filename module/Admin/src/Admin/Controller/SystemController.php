@@ -15,11 +15,13 @@ namespace Admin\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
-use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrineAdapter;
-use DoctrineModule\Validator\NoObjectExists;
+use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator as DoctrinePaginatorAdapter;
 
-use Zend\Paginator\Paginator as Paginator;
+use DoctrineModule\Validator\NoObjectExists as NoObjectExists;
+#use DoctrineModule\Validator\ObjectExists as ObjectExists;
+
+use Zend\Paginator\Paginator as ZendPaginator;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -29,6 +31,10 @@ use Application\Form\System\SystemForm as SystemForm;
 use Application\Form\System\Search as SearchForm;
 
 use Application\Entity\System;
+
+
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterInterface;
 
 class SystemController extends AbstractActionController {
 
@@ -55,7 +61,54 @@ class SystemController extends AbstractActionController {
 
     
     
-    public function indexAction()
+    public function paginationWithDQL() 
+    {
+        $dql = "SELECT s FROM Application\\Entity\\System s ORDER BY s.id DESC";
+        $query = $entityManager->createQuery($dql);
+
+    }
+
+
+
+    public function indexAction() 
+    {
+        $decorator = $this->DecoratorPlugin();
+        $systemPlugin = $this->SystemPlugin();
+        
+        $form = new SearchForm();
+
+        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        #$repository = $entityManager->getRepository('Application\Entity\System');
+
+        // http://docs.doctrine-project.org/en/latest/reference/query-builder.html
+        $qb = $entityManager->createQueryBuilder()
+              ->from('Application\Entity\System', 's')
+              ->select("s")
+              ->orderBy('s.id', 'desc');
+        
+        $query = $qb->getQuery();
+
+        $adapter = new DoctrinePaginatorAdapter(new DoctrinePaginator($query));
+
+        $paginator = new ZendPaginator($adapter);
+        $paginator->setDefaultItemCountPerPage(15);
+
+        $page = (int)$this->params()->fromQuery('page');
+        if($page) $paginator->setCurrentPageNumber($page); 
+
+        $view = new ViewModel(array(
+                    'form' => $form,
+                    'paginator' => $paginator,
+                    'systemPlugin' => $systemPlugin,
+                    'decorator' => $decorator
+                ));
+
+        return $view;
+
+    }
+
+
+    public function oldIndexAction()
     {
         // Zend framework 2.2.x album example of pagination with search result
         // https://github.com/tahmina8765/zf2_search_with_pagination_example
@@ -66,18 +119,30 @@ class SystemController extends AbstractActionController {
         
         $form = new SearchForm();
         
-        $page = $this->params()->fromRoute('page') ? (int) $this->params()->fromRoute('page') : 1;
-        
+    
         $request = $this->getRequest();
         if ($request->isPost()) {}
 
-        #$entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        #$repository = $entityManager->getRepository('Application\Entity\System');
+        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $repository = $entityManager->getRepository('Application\Entity\System');
         
-        $repository = $this->getEntityManager()->getRepository('Application\Entity\System');
-        $adapter = new DoctrineAdapter(new ORMPaginator($repository->createQueryBuilder('system')));
-        
-        $paginator = new Paginator($adapter);
+
+
+        # $results = $this->getEntityManager()->getRepository('Application\Entity\System')->getPaginator(0, 3);
+        /* foreach ($paginator as $s) {
+            var_dump($s->getName() ); echo '<br />';
+        } */
+
+        #print_r($systems); #exit();
+        /* $dql = "SELECT s, u FROM Application\Entity\System s JOIN s.users u ORDER BY s.id DESC";
+        $query = $this->getEntityManager()->createQuery($dql)
+                       ->setFirstResult(0)
+                       ->setMaxResults(100); */
+
+        $adapter = new DoctrinePaginatorAdapter(new DoctrinePaginator($repository->createQueryBuilder('system')));
+        #$adapter = new DoctrineAdapter(new ORMPaginator($repository));
+
+        $paginator = new ZendPaginator($adapter);
         $paginator->setDefaultItemCountPerPage(15);
 
         $page = (int)$this->params()->fromQuery('page');
@@ -108,30 +173,42 @@ class SystemController extends AbstractActionController {
     // http://www.zf2.com.br/tutoriais/post/zf2-doctrine2-dbnorecordexists-vs-noobjectexists
     // https://github.com/doctrine/DoctrineModule/blob/master/docs/validator.md
     
+
     public function addAction()
     {
+        /* $validator = new \DoctrineModule\Validator\ObjectExists(array(
+            'object_repository' => $this->getEntityManager()->getRepository('Application\Entity\System'),
+            'fields' => array('name')
+        ));
+
+        var_dump($validator->isValid('test123')); */
+
         $form = new SystemForm();
-        $name = $form->getInputFilter()->get('name');
+
         
-        $noObjectExistsValidator = new NoObjectExists(array(
-                'object_repository' => $this->getEntityManager()->getRepository('Application\Entity\System'),
-                'fields' => array(
-                    'name'
-                )
-        )); 
-        #$form->setInputFilter($noObjectExistsValidator);
-        $name->getValidatorChain()->addValidator($noObjectExistsValidator);
-        
+
+
         $form->get('submit')->setAttribute('label', 'Add');
 
         $request = $this->getRequest();
 
         if ($request->isPost()) 
         {
-            # new doctrine
+            # new doctrine Entity
             $system = new System();
 
+            # check if object is exists
+            $validator = new NoObjectExists(array(
+                    'object_repository' => $this->getEntityManager()->getRepository('Application\Entity\System'),
+                    'fields' => array(
+                        'name'
+                    )
+            ));
+            $validator->setMessage('Sorry guy, a system with this name already exists !', 'objectFound');
+
             $form->setInputFilter($system->getInputFilter());
+            $form->getInputFilter()->get('name')->getValidatorChain()->addValidator($validator);
+
             $form->setData($request->getPost());
 
             if ($form->isValid()) 
